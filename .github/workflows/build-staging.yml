@@ -42,7 +42,7 @@ jobs:
         uses: Azure/setup-helm@v4.2.0
 
       - name: Install Helm
-        uses: Azure/setup-helm@v1
+        uses: Azure/setup-helm@v4
         with:
           version: v4.2.0
 
