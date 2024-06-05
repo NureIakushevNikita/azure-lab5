@@ -1,15 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "helm-lab5.fullname" . }}
-  labels:
-    {{- include "helm-lab5.labels" . | nindent 4 }}
+  name: lab5
+  namespace: {{ default "staging" .Release.Namespace }}
 spec:
-  type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: 80
       protocol: TCP
+      targetPort: http
       name: http
   selector:
-    {{- include "helm-lab5.selectorLabels" . | nindent 4 }}
+    app: lab5
+  type: ClusterIP
