@@ -32,3 +32,17 @@ jobs:
           context: .
           tags: ${{secrets.ACR_NAME}}/lab5:latest,${{secrets.ACR_NAME}}/lab5:${{ steps.fetch_version.outputs.TAG }}
           push: true
+
+      - name: Run Helm Deploy
+        run: |
+          helm upgrade \
+            --install \
+            --create-namespace \
+            --atomic \
+            --wait \
+            --namespace production \
+            lab5 \
+            ./helm-lab5 \
+            --set image.repository=${{ secrets.ACR_NAME }} \
+            --set dns.name=${{ secrets.DNS_NAME }} \
+            --set image.tag=${GITHUB_REF##*/}
