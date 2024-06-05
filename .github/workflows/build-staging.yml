@@ -39,9 +39,8 @@ jobs:
       - uses: actions/checkout@v2   
 
       - name: Install Helm
-        uses: Azure/setup-helm@v4
-        with:
-          version: v4.2.0
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
       - name: Sign in to Azure with OIDC
         uses: Azure/login@v2.1.1
